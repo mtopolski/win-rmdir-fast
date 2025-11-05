@@ -113,3 +113,49 @@ jobs:
       run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  update-homebrew:
+    name: Update Homebrew Tap
+    needs: build-release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Get version
+      id: version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+    - name: Download macOS binaries
+      run: |
+        VERSION=${{ steps.version.outputs.VERSION }}
+        wget https://github.com/mtopolski/rmbrr/releases/download/v${VERSION}/rmbrr-macos-x86_64 -O rmbrr-macos-x86_64
+        wget https://github.com/mtopolski/rmbrr/releases/download/v${VERSION}/rmbrr-macos-aarch64 -O rmbrr-macos-aarch64
+
+    - name: Calculate SHA256
+      id: sha256
+      run: |
+        SHA_X86=$(shasum -a 256 rmbrr-macos-x86_64 | awk '{print $1}')
+        SHA_ARM=$(shasum -a 256 rmbrr-macos-aarch64 | awk '{print $1}')
+        echo "SHA_X86=$SHA_X86" >> $GITHUB_OUTPUT
+        echo "SHA_ARM=$SHA_ARM" >> $GITHUB_OUTPUT
+
+    - name: Update formula
+      run: |
+        VERSION=${{ steps.version.outputs.VERSION }}
+        SHA_X86=${{ steps.sha256.outputs.SHA_X86 }}
+        SHA_ARM=${{ steps.sha256.outputs.SHA_ARM }}
+
+        sed -i "s/version \".*\"/version \"${VERSION}\"/" rmbrr.rb
+        sed -i "/url.*x86_64/,/sha256/ s/sha256 \".*\"/sha256 \"${SHA_X86}\"/" rmbrr.rb
+        sed -i "/url.*aarch64/,/sha256/ s/sha256 \".*\"/sha256 \"${SHA_ARM}\"/" rmbrr.rb
+
+    - name: Push to homebrew-tap
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mtopolski/homebrew-tap.git tap
+        cp rmbrr.rb tap/
+        cd tap
+        git add rmbrr.rb
+        git commit -m "Update rmbrr to ${{ steps.version.outputs.VERSION }}"
+        git push
