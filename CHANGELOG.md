@@ -1,6 +1,16 @@
 # Changelog
 
-## [0.1.0] - Unreleased
+## [0.1.1] - 2025-01-05
+
+### Fixed
+- Removed unnecessary type casts in Windows API error handling
+- Cleaned up low-value code comments
+- Fixed clippy warnings for all platforms
+
+### Changed
+- Removed time estimation from dry-run output (unreliable prediction)
+
+## [0.1.0] - 2025-01-05
 
 Initial release.
 
