@@ -2,7 +2,7 @@
 
 use rmbrr::{broker::Broker, tree, worker};
 use std::fs::{self, File};
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use std::sync::Arc;
 use std::time::Instant;
 
@@ -62,7 +62,7 @@ fn count_files(path: &Path) -> usize {
 }
 
 /// Run the deletion pipeline on a directory
-fn delete_with_pipeline(path: &PathBuf) {
+fn delete_with_pipeline(path: &Path) {
     let tree = tree::discover_tree(path).unwrap();
     let (broker, tx, rx) = Broker::new(tree);
     let broker = Arc::new(broker);
@@ -164,7 +164,7 @@ fn test_empty_directories() {
     // Create empty directory structure
     fs::create_dir_all(temp.join("a/b/c")).unwrap();
     fs::create_dir_all(temp.join("d/e")).unwrap();
-    fs::create_dir(&temp.join("f")).unwrap();
+    fs::create_dir(temp.join("f")).unwrap();
 
     assert!(temp.exists());
 

@@ -213,12 +213,10 @@ fn process_single_path(path: &Path, args: &Args) -> Result<DeletionStats, Error>
                     path: path.to_path_buf(),
                     reason: "system directory cannot be deleted".to_string(),
                 });
-            } else {
-                if !args.silent {
-                    eprintln!("\n⚠️  WARNING: Deleting dangerous path with --force");
-                    eprintln!("   {}", reason);
-                    eprintln!();
-                }
+            } else if !args.silent {
+                eprintln!("\n⚠️  WARNING: Deleting dangerous path with --force");
+                eprintln!("   {}", reason);
+                eprintln!();
             }
         }
     }

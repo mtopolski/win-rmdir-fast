@@ -3,11 +3,11 @@
 use rmbrr::{broker::Broker, tree, worker};
 use std::fs::{self, File};
 use std::io::Write;
-use std::path::PathBuf;
+use std::path::Path;
 use std::sync::Arc;
 
 /// Helper function to delete with pipeline
-fn delete_directory(path: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+fn delete_directory(path: &Path) -> Result<(), Box<dyn std::error::Error>> {
     let tree = tree::discover_tree(path)?;
     let (broker, tx, rx) = Broker::new(tree);
     let broker = Arc::new(broker);

@@ -219,17 +219,11 @@ mod tests {
                     .spawn(move || {
                         let config = WorkerConfig::default();
                         let error_tracker = Arc::new(ErrorTracker::new());
-                        loop {
-                            match rx.recv_timeout(Duration::from_millis(100)) {
-                                Ok(dir) => {
-                                    work_count.fetch_add(1, Ordering::SeqCst);
-                                    // Actually delete the directory content and dir
-                                    let _ = delete_files_in_dir(&dir, &config, &error_tracker);
-                                    let _ = remove_dir(&dir);
-                                    broker.mark_complete(dir);
-                                }
-                                Err(_) => break,
-                            }
+                        while let Ok(dir) = rx.recv_timeout(Duration::from_millis(100)) {
+                            work_count.fetch_add(1, Ordering::SeqCst);
+                            let _ = delete_files_in_dir(&dir, &config, &error_tracker);
+                            let _ = remove_dir(&dir);
+                            broker.mark_complete(dir);
                         }
                     })
                     .expect("Failed to spawn test worker")
