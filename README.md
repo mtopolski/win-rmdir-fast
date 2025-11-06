@@ -27,7 +27,7 @@ Benchmark on node_modules (28,268 files, 5,124 directories, 446 MB):
 
 Test system: 16-core CPU, SSD. Default thread count (CPU cores).
 
-### Macos (ARM)
+### MacOS (ARM)
 Benchmark on node_modules (28,340 files, 5,126 directories, 413 MB):
 
 | Method              | Time      | vs rmbrr |
