@@ -151,11 +151,11 @@ jobs:
 
     - name: Push to homebrew-tap
       run: |
+        git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mtopolski/homebrew-tap.git tap
+        cd tap
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mtopolski/homebrew-tap.git tap
-        cp rmbrr.rb tap/
-        cd tap
+        cp ../rmbrr.rb .
         git add rmbrr.rb
         git commit -m "Update rmbrr to ${{ steps.version.outputs.VERSION }}"
         git push
