@@ -1,21 +1,26 @@
 # Changelog
 
-## [0.1.9] - 2025-01-05
+## [0.1.10] - 2025-11-06
 
 ### Changed
 - Default operation is silent
 
-## [0.1.8] - 2025-01-05
+## [0.1.9] - 2025-11-05
+
+### Changed
+- Default operation is silent
+
+## [0.1.8] - 2025-11-05
 
 ### Fixed
 - Added missing bin/rmbrr.js wrapper for npm package
 
-## [0.1.7] - 2025-01-05
+## [0.1.7] - 2025-11-05
 
 ### Fixed
 - Growing pains with publishing to 3 targets
 
-## [0.1.1] - 2025-01-05
+## [0.1.1] - 2025-11-05
 
 ### Fixed
 - Removed unnecessary type casts in Windows API error handling
@@ -25,7 +30,7 @@
 ### Changed
 - Removed time estimation from dry-run output (unreliable prediction)
 
-## [0.1.0] - 2025-01-05
+## [0.1.0] - 2025-11-05
 
 Initial release.
 
