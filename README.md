@@ -16,7 +16,7 @@ Benchmark on node_modules (28,434 files, 5,122 directories, 350 MB):
 | cmd del+rmdir       | 7,175ms   | 4.03x slower |
 | robocopy /MIR       | 9,528ms   | 5.35x slower |
 
-### Linux
+### Linux (Ubuntu, WSL)
 Benchmark on node_modules (28,268 files, 5,124 directories, 446 MB):
 
 | Method              | Time      | vs rmbrr |
@@ -26,6 +26,17 @@ Benchmark on node_modules (28,268 files, 5,124 directories, 446 MB):
 | rimraf              | 1,662ms   | 8.65x slower |
 
 Test system: 16-core CPU, SSD. Default thread count (CPU cores).
+
+### Macos (ARM)
+Benchmark on node_modules (28,340 files, 5,126 directories, 413 MB):
+
+| Method              | Time      | vs rmbrr |
+|---------------------|-----------|----------|
+| rmbrr               | 1,170ms   | 1.00x    |
+| rimraf              | 1,270ms   | 1.09x slower |
+| rm -rf              | 3,000ms   | 2.56x slower |
+
+Test system: 2020 M1 Macbook Pro, SSD. Default thread count (CPU cores).
 
 ## Installation
 
