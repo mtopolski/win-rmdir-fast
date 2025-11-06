@@ -73,10 +73,15 @@ jobs:
       if: matrix.os != 'windows-latest'
       run: strip target/${{ matrix.target }}/release/${{ matrix.artifact_name }}
 
+    - name: Rename binary
+      run: |
+        mkdir -p release-assets
+        cp target/${{ matrix.target }}/release/${{ matrix.artifact_name }} release-assets/${{ matrix.asset_name }}
+
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v1
       with:
-        files: target/${{ matrix.target }}/release/${{ matrix.artifact_name }}
+        files: release-assets/${{ matrix.asset_name }}
 
   publish-crates:
     name: Publish to crates.io
