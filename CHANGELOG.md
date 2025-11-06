@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.1.8] - 2025-01-05
+
+### Fixed
+- Added missing bin/rmbrr.js wrapper for npm package
+
 ## [0.1.7] - 2025-01-05
 
 ### Fixed
