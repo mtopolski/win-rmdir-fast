@@ -1,6 +1,6 @@
 {
   "name": "rmbrr",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Fast parallel directory deletion with cross-platform support",
   "bin": {
     "rmbrr": "./bin/rmbrr.js"

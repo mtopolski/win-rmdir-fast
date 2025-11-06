@@ -151,7 +151,7 @@ jobs:
 
     - name: Push to homebrew-tap
       run: |
-        git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/mtopolski/homebrew-tap.git tap
+        git clone https://x-access-token:${{ secrets.HOMEBREW_TAP_TOKEN }}@github.com/mtopolski/homebrew-tap.git tap
         cd tap
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"

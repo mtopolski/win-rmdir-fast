@@ -38,6 +38,7 @@ npx rmbrr ./node_modules
 
 ### Homebrew (macOS/Linux)
 ```bash
+brew tap mtopolski/tap
 brew install rmbrr
 ```
 
