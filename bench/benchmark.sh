@@ -112,7 +112,7 @@ for THREADS in "${THREAD_COUNTS[@]}"; do
 
     # Measure deletion time
     START=$(date +%s%3N)
-    "$RMBRR" "$TEST_DIR" --silent --threads "$THREADS" 2>/dev/null || true
+    "$RMBRR" "$TEST_DIR" --threads "$THREADS" 2>/dev/null || true
     END=$(date +%s%3N)
 
     # Verify deletion

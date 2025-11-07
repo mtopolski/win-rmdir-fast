@@ -76,7 +76,7 @@ foreach ($Threads in $ThreadCounts) {
         Name = "rmbrr (${Threads} threads)"
         Command = {
             param($Path, $ThreadCount)
-            & $Rmbrr $Path --silent --threads $ThreadCount
+            & $Rmbrr $Path --threads $ThreadCount
         }.GetNewClosure()
         Threads = $Threads
     }

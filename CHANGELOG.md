@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.11] - 2025-11-07
+
+### Changed
+- Removed `--silent` flag (silent operation is now the default)
+
+### Added
+- Safety documentation in README
+
 ## [0.1.10] - 2025-11-06
 
 ### Changed
@@ -38,7 +46,7 @@ Initial release.
 - Fast parallel directory deletion
 - Windows POSIX semantics for immediate namespace removal
 - Cross-platform support (Windows, Linux, macOS)
-- Progress reporting with `--silent` flag
+- Silent operation by default
 - Dry-run mode with `-n` / `--dry-run`
 - Multi-path deletion support
 - Confirmation prompt with `--confirm`

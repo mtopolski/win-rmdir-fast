@@ -94,7 +94,24 @@ rmbrr --stats path/to/directory
 
 # Specify thread count
 rmbrr --threads 8 path/to/directory
+
+# Force deletion of current working directory (use with caution)
+rmbrr --force path/to/directory
 ```
+
+## Safety
+
+rmbrr includes built-in safety checks to prevent accidental system damage:
+
+### Always Protected (cannot be deleted even with `--force`)
+- System directories (`C:\Windows`, `/bin`, `/usr`, etc.)
+- Drive roots (`C:\`, `/`, etc.)
+- User home directory (`$HOME`, `%USERPROFILE%`)
+
+### Requires `--force` flag
+- Current working directory or its parents
+
+All other paths can be deleted without restriction.
 
 ## How it works
 
